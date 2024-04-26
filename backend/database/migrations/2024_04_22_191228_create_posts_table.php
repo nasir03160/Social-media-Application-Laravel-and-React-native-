@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->longText(column:'body')->nullable();
-            $table->foreignId(column:'created_by')->constrained(table:'user');
-            $table->foreignId(column:'updated_by')->constrained(table:'user');
-            $table->timestamp(column:'deleted_at')->nullable();
-            $table->foreignId(column:'deleted_by')->nullable()->constrained(table:'user');
-
+            $table->longText('body')->nullable();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('group_id')->nullable()->constrained('groups');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
